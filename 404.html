@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found | Nicosia Rugby Club</title>
+  <meta name="robots" content="noindex">
+  <script>
+    /* GitHub Pages serves this file at any missing URL, so relative links would break on nested paths.
+       This sets the site root: "/REPO/" on a github.io project site, "/" on a custom domain. */
+    (function () {
+      var root = "/";
+      if (/\.github\.io$/.test(location.hostname)) {
+        var first = location.pathname.split("/")[1];
+        if (first) root = "/" + first + "/";
+      }
+      var base = document.createElement("base");
+      base.href = root;
+      document.head.appendChild(base);
+      document.documentElement.classList.add("js");
+    })();
+  </script>
+  <meta property="og:image" content="https://nicosia-rugby.github.io/website/assets/images/og-image.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="clubhouse/posts.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body data-root="" data-lang-root="">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Nicosia Rugby Club, home">
+        <img src="assets/images/nrc-mark.png" width="233" height="215" alt="">
+        <span>Nicosia Rugby Club</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+        <span class="menu-toggle-bars" aria-hidden="true"></span><span class="menu-toggle-label">Menu</span>
+      </button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html#training">Training</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li data-clubhouse-link hidden><a href="clubhouse/index.html">Clubhouse</a></li>
+          <li class="nav-cta-mobile"><a class="btn" href="index.html#contact">Join a training</a></li>
+        </ul>
+      </nav>
+      <a class="btn header-cta" href="index.html#contact">Join a training</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero not-found" aria-labelledby="page-title">
+      <p class="eyebrow">Page not found</p>
+      <h1 id="page-title">Off the<br><span class="accent">pitch.</span></h1>
+      <p class="lead">This page does not exist or has moved. Training times, locations and how to join are all on the home page.</p>
+      <p lang="el">Η σελίδα δεν βρέθηκε. <a href="el/index.html">Μετάβαση στην αρχική σελίδα</a>.</p>
+      <p><a class="btn" href="index.html">Go to the home page</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand">Nicosia Rugby Club</p>
+        <p>Nicosia, Cyprus</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <ul>
+          <li><a href="index.html#training">Training</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li data-clubhouse-link hidden><a href="clubhouse/index.html">Clubhouse</a></li>
+          <li><a href="index.html#contact">Join a training</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
