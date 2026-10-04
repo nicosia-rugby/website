@@ -270,6 +270,9 @@ h3 { margin: 0 0 10px; font-size: 23px; line-height: 1.15; }
   min-width: 0;
 }
 /* Fixed 16:9 frame: the photo is never cropped or stretched. */
+.hero-figure { width: 100%; margin: 0; }
+/* Hero caption: same style as the club-photo caption (global figcaption), inset from the cell border. */
+.hero-figure figcaption { padding: 10px 16px 12px; }
 .hero-photo-frame {
   position: relative;
   width: 100%;
@@ -291,25 +294,6 @@ h3 { margin: 0 0 10px; font-size: 23px; line-height: 1.15; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-/* Subtle navy wash for depth only; natural colours stay intact. */
-.hero-photo-frame::after,
-.club-photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(16, 43, 89, 0) 55%, rgba(16, 43, 89, .2));
-  pointer-events: none;
-}
-.photo-caption {
-  position: absolute;
-  left: 18px; bottom: 18px;
-  z-index: 1;
-  padding: 7px 10px;
-  background: rgba(10, 10, 11, .78);
-  color: var(--white);
-  font-size: 13px;
-  font-weight: 750;
 }
 
 /* ---------- Schedule ---------- */
