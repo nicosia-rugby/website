@@ -237,7 +237,7 @@ h3 { margin: 0 0 10px; font-size: 23px; line-height: 1.15; }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: .72fr 1.55fr .9fr;
+  grid-template-columns: minmax(0, .62fr) minmax(0, 1.9fr) minmax(0, .8fr);
   gap: 1px;
   margin-top: 42px;
   background: var(--line-grey);
@@ -264,12 +264,27 @@ h3 { margin: 0 0 10px; font-size: 23px; line-height: 1.15; }
 .intro { margin: 0; }
 
 .hero-photo {
-  position: relative;
-  min-height: 390px;
+  display: flex;
+  align-items: center;
   margin: 0;
+  min-width: 0;
+}
+/* Fixed 16:9 frame: the photo is never cropped or stretched. */
+.hero-photo-frame {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 }
-.hero-photo img,
+/* Fixed 3:2 frame for the club photo. */
+.club-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+.hero-photo-frame img,
 .club-photo img {
   position: absolute;
   inset: 0;
@@ -277,9 +292,8 @@ h3 { margin: 0 0 10px; font-size: 23px; line-height: 1.15; }
   height: 100%;
   object-fit: cover;
 }
-.hero-photo img { object-position: 50% 45%; }
 /* Subtle navy wash for depth only; natural colours stay intact. */
-.hero-photo::after,
+.hero-photo-frame::after,
 .club-photo::after {
   content: "";
   position: absolute;
@@ -386,12 +400,26 @@ h3 { margin: 0 0 10px; font-size: 23px; line-height: 1.15; }
 .location dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; }
 .location dt { color: var(--mid-grey); font-size: 14px; font-weight: 800; }
 .location dd { margin: 0; }
+/* Map: fixed 16:10 wrapper. padding-bottom keeps the ratio on every engine;
+   the iframe is pinned inside and sized the WebKit-safe way so iOS cannot grow it. */
 .location .map-frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  padding-bottom: 62.5%;
   margin-top: 20px;
-  aspect-ratio: 16 / 10;
   border: 1px solid var(--line-grey);
 }
-.location .map-frame iframe { width: 100%; height: 100%; border: 0; }
+.location .map-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 1px;
+  min-width: 100%;
+  height: 1px;
+  min-height: 100%;
+  border: 0;
+}
 .tbc { color: var(--navy); font-weight: 800; }
 .locations-note { margin-top: 18px; }
 
@@ -419,17 +447,26 @@ h3 { margin: 0 0 10px; font-size: 23px; line-height: 1.15; }
 .route p { margin: 0; }
 
 /* ---------- Membership (optional, hidden until confirmed) ---------- */
+/* Membership: 2 columns on phones/tablets, 4 on desktop. Each card draws its own
+   right/bottom border; the list draws top/left. No grey background, so a missing
+   card can never show as a grey block. */
 .fees {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
-  background: var(--line-grey);
-  border: 1px solid var(--line-grey);
+  border-top: 1px solid var(--line-grey);
+  border-left: 1px solid var(--line-grey);
 }
-.fee { padding: 22px; background: var(--white); }
+.fee {
+  min-width: 0;
+  padding: 22px;
+  background: var(--white);
+  border-right: 1px solid var(--line-grey);
+  border-bottom: 1px solid var(--line-grey);
+}
 .fee strong { display: block; font-size: 30px; letter-spacing: -.03em; }
 
 /* ---------- Events ---------- */
@@ -524,8 +561,7 @@ h3 { margin: 0 0 10px; font-size: 23px; line-height: 1.15; }
   align-items: end;
 }
 .club figure { margin: 0; }
-.club-photo { position: relative; min-height: 390px; overflow: hidden; }
-.club-photo img { object-position: 60% 40%; }
+
 figcaption { padding-top: 10px; color: var(--mid-grey); font-size: 13px; font-weight: 700; }
 
 /* ---------- Contact ---------- */
@@ -609,7 +645,7 @@ figcaption { padding-top: 10px; color: var(--mid-grey); font-size: 13px; font-we
   .hero-message { padding: 24px; order: 1; }
   .motto { font-size: 31px; }
   .hero-schedule { order: 2; }
-  .hero-photo { order: 3; min-height: 0; aspect-ratio: 3 / 2; }
+  .hero-photo { order: 3; }
 
   .facts { grid-template-columns: 1fr 1fr; }
   .facts li { padding: 18px; }
@@ -621,7 +657,7 @@ figcaption { padding-top: 10px; color: var(--mid-grey); font-size: 13px; font-we
   .routes, .events { grid-template-columns: 1fr; }
   .route { min-height: 0; }
   .event { min-height: 170px; }
-  .club-photo { min-height: 0; aspect-ratio: 3 / 2; }
+
   .event-row { grid-template-columns: 1fr; gap: 12px; }
 }
 
@@ -841,6 +877,57 @@ figcaption { padding-top: 10px; color: var(--mid-grey); font-size: 13px; font-we
 @media (max-width: 700px) {
   .post-grid > li { flex-basis: 100%; max-width: 420px; }
 }
+
+
+/* ==========================================================================
+   v4: overflow guards, desktop headline scale, membership columns
+   ========================================================================== */
+.hero-grid > *, .first-grid > *, .locations > *, .location, .club > *,
+.contact-row > *, .routes > *, .events > *, .label-key > * { min-width: 0; }
+
+@media (min-width: 1101px) {
+  .fees { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Desktop and wide tablets only (>900 px). Phones keep their current sizes. */
+@media (min-width: 901px) {
+  /* Hero headline: about 25% smaller than before (max 170 → 128 px), continuing
+     smoothly from the tablet size at 900 px (~120 px). */
+  .hero-title { font-size: clamp(96px, calc(7vw + 56px), 128px); }
+  /* Page headlines (events, clubhouse, 404): same scale as the hero. */
+  .page-title,
+  .page-hero--compact .page-title { font-size: clamp(88px, calc(7vw + 50px), 128px); }
+  /* Section headings: about 15% smaller (max 105 → 89 px). */
+  .section-title { font-size: clamp(44px, 6.8vw, 89px); }
+}
+
+
+/* Hero layout: three columns only where a 16:9 photo is as tall as the text columns.
+   Below 1800 px the photo gets its own full-width 16:9 row under message + schedule. */
+@media (min-width: 1101px) and (max-width: 1799px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .hero-photo { grid-column: 1 / -1; order: 3; }
+  .hero-message { order: 1; }
+  .hero-schedule { order: 2; }
+}
+
+/* Very small phones (<360 px): long single words must fit. 360 px and up unchanged. */
+@media (max-width: 359px) {
+  h1, .hero-title, .page-title, .page-hero--compact h1 { font-size: 14.5vw; }
+}
+/* Section headings below 383 px: long words like "BACKGROUNDS." must fit (390 px+ unchanged). */
+@media (max-width: 382px) {
+  h2, .section-title { font-size: 11.5vw; }
+}
+
+
+/* Three-column hero (≥1800 px): the message column is narrow, so the motto is sized
+   to fit its longest word (e.g. "Διαφορετικοί"). */
+@media (min-width: 1800px) {
+  .motto { font-size: 36px; }
+}
+/* Safety net: a long word may break rather than overflow its box. */
+.motto, .intro, .post-card h2, .post-card h3, .session-meta, .fee { overflow-wrap: break-word; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
