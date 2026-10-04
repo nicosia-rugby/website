@@ -17,15 +17,16 @@
   <meta property="og:description" content="Αρχάριοι ευπρόσδεκτοι. Άνδρες και γυναίκες. Η πρώτη προπόνηση είναι δωρεάν. Διαφορετικοί άνθρωποι. Μία ομάδα.">
   <meta property="og:locale" content="el_GR">
   <meta property="og:url" content="https://nicosia-rugby.github.io/website/el/">
-  <meta property="og:image" content="https://nicosia-rugby.github.io/website/assets/images/og-image.jpg">
+  <meta property="og:image" content="https://nicosia-rugby.github.io/website/assets/images/og-team-v2.jpg">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Παίκτες του Nicosia Rugby Club με κίτρινες και μαύρες φανέλες σε αγώνα">
+  <meta property="og:image:alt" content="Η ομάδα του Nicosia Rugby Club στο γήπεδο.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#102b59">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
-  <link rel="preload" as="image" href="../assets/images/nicosia-match-action.webp" imagesrcset="../assets/images/nicosia-match-action-800.webp 800w, ../assets/images/nicosia-match-action.webp 1400w" imagesizes="(max-width: 900px) 100vw, 50vw" fetchpriority="high">
+  <link rel="preload" as="image" href="../assets/images/hero-team-v2-1600.webp" imagesrcset="../assets/images/hero-team-v2-800.webp 800w, ../assets/images/hero-team-v2-1600.webp 1600w" imagesizes="(max-width: 1799px) 100vw, 55vw" fetchpriority="high">
   <!-- Structured data: confirmed facts only. -->
   <script type="application/ld+json">
 {
@@ -87,8 +88,8 @@
   <main id="main">
     <!-- ============ HERO ============ -->
     <section class="hero" aria-labelledby="hero-title">
-      <p class="eyebrow">Ράγκμπυ στη Λευκωσία</p>
-      <h1 id="hero-title">Ράγκμπυ<br><span class="accent">στη Λευκωσία.</span></h1>
+      <p class="eyebrow">Nicosia Rugby Club</p>
+      <h1 class="hero-title" id="hero-title">Ράγκμπυ<br><span class="accent">στη Λευκωσία</span></h1>
 
       <div class="hero-grid">
         <div class="hero-message">
@@ -99,14 +100,17 @@
           <div><a class="btn" href="#contact">Έλα σε προπόνηση</a></div>
         </div>
 
-        <figure class="hero-photo">
-          <picture>
-            <source type="image/webp" srcset="../assets/images/nicosia-match-action-800.webp 800w, ../assets/images/nicosia-match-action.webp 1400w" sizes="(max-width: 900px) 100vw, 50vw">
-            <img src="../assets/images/nicosia-match-action.webp" width="1400" height="760" fetchpriority="high" decoding="async"
-                 alt="Τρεις φωτογραφίες αγώνα με παίκτες της Nicosia Rugby με κίτρινες και μαύρες φανέλες σε χορτάρινο γήπεδο: ένας προωθεί την μπάλα δίπλα σε αντίπαλο με μπλε, ο αριθμός 5 τρέχει για υποστήριξη και δύο συμπαίκτες πιάνουν μια ψηλή πάσα.">
-          </picture>
-          <figcaption class="photo-caption">Το Nicosia Rugby Club σε αγώνα</figcaption>
-        </figure>
+        <!-- HERO PHOTO: 16:9 only (1600×900 + 800×450). New photo = new file names (-v3…) so browsers don't show a cached copy. -->
+        <div class="hero-photo">
+          <figure class="hero-photo-frame">
+            <img src="../assets/images/hero-team-v2-1600.webp"
+                 srcset="../assets/images/hero-team-v2-800.webp 800w, ../assets/images/hero-team-v2-1600.webp 1600w"
+                 sizes="(max-width: 1799px) 100vw, 55vw"
+                 width="1600" height="900" fetchpriority="high" decoding="async"
+                 alt="Η ομάδα του Nicosia Rugby Club στο γήπεδο.">
+            <figcaption class="photo-caption">Υπάρχει μια ομάδα για σένα εδώ.</figcaption>
+          </figure>
+        </div>
 
         <!-- SEASONAL UPDATE: season label, training days, times and pitches (also update "Where we train" below) -->
         <section class="hero-schedule" aria-labelledby="schedule-title">
@@ -138,7 +142,7 @@
     <!-- ============ FIRST TRAINING ============ -->
     <section class="section" id="training" aria-labelledby="training-title">
       <p class="section-kicker">Εβδομαδιαίες προπονήσεις</p>
-      <h2 id="training-title">Η πρώτη σου προπόνηση είναι δωρεάν</h2>
+      <h2 class="section-title" id="training-title">Η πρώτη σου προπόνηση είναι δωρεάν</h2>
 
       <div class="first-grid">
         <div class="first-copy">
@@ -201,10 +205,10 @@
       <h3 class="subhead" id="membership-title">Συνδρομή</h3>
       <ul class="fees" aria-labelledby="membership-title">
         <li class="fee"><strong>Δωρεάν</strong>Πρώτη προπόνηση</li>
+        <li class="fee"><strong>Δωρεάν</strong>Φιλοξενούμενοι παίκτες</li>
         <li class="fee"><strong>€5</strong>Ανά προπόνηση</li>
         <li class="fee"><strong>€20</strong>Μηνιαία</li>
       </ul>
-      <p class="fee-note">Οι επισκέπτες και οι παίκτες από άλλες πόλεις προπονούνται δωρεάν.</p>
     </section>
 
     <!-- ============ EVENTS PREVIEW ============ -->
@@ -212,7 +216,7 @@
          past events are hidden automatically. Keep in step with events.html. -->
     <section class="section" id="events" aria-labelledby="events-title">
       <p class="section-kicker">Όλη τη σεζόν</p>
-      <h2 id="events-title">Αγώνες ράγκμπυ</h2>
+      <h2 class="section-title" id="events-title">Αγώνες ράγκμπυ</h2>
       <ul class="events events--upcoming">
         <li class="event event--nicosia" data-end="2026-10-10">
           <span class="event-label event-label--nicosia">Παίκτες της Nicosia με τους Ayia Napa Lions</span>
@@ -379,19 +383,20 @@
     <section class="section club" id="club" aria-labelledby="club-title">
       <div>
         <p class="section-kicker">Ο σύλλογος</p>
-        <h2 id="club-title">Διαφορετικές διαδρομές. Μία ομάδα.</h2>
+        <h2 class="section-title" id="club-title">Διαφορετικές διαδρομές. Μία ομάδα.</h2>
         <p>Το Nicosia Rugby Club φέρνει κοντά Κύπριους, διεθνείς κατοίκους και φοιτητές. Προπονήσου σε όποιο επίπεδο κι αν είσαι, παίξε Touch και 7s με τη Λευκωσία ή αγωνίσου στο XV στο πρωτάθλημα Κύπρου με τους Ayia Napa Lions.</p>
         <p class="values"><span class="visually-hidden">Οι αξίες μας: </span>Σεβασμός. Ακεραιότητα. Αλληλεγγύη. Πάθος. Πειθαρχία.</p>
       </div>
       <figure>
+        <!-- CLUB PHOTO: 3:2 only (1200×800 + 800×533). -->
         <div class="club-photo">
-          <picture>
-            <source type="image/webp" srcset="../assets/images/nicosia-club-action-800.webp 800w, ../assets/images/nicosia-club-action.webp 1400w" sizes="(max-width: 900px) 100vw, 40vw">
-            <img src="../assets/images/nicosia-club-action.webp" width="1400" height="760" loading="lazy" decoding="async"
-                 alt="Δύο φωτογραφίες αγώνα: ένας παίκτης της Nicosia Rugby με την κίτρινη φανέλα με τον αριθμό 5 και κόκκινες κάλτσες τρέχει στο γήπεδο, και δύο παίκτες της Nicosia με κίτρινες και μαύρες φανέλες πιάνουν μια πάσα, ενώ ένας αντίπαλος με μπλε πέφτει στο έδαφος.">
-          </picture>
+          <img src="../assets/images/action-v2.webp"
+               srcset="../assets/images/action-v2-800.webp 800w, ../assets/images/action-v2.webp 1200w"
+               sizes="(max-width: 900px) 100vw, 40vw"
+               width="1200" height="800" loading="lazy" decoding="async"
+               alt="Παίκτες του Nicosia Rugby Club με κίτρινες και μαύρες φανέλες σπρώχνουν προς τα εμπρός.">
         </div>
-        <figcaption>Το Nicosia Rugby Club σε αγώνα</figcaption>
+        <figcaption>Το Nicosia Rugby Club σε δράση</figcaption>
       </figure>
     </section>
 
@@ -400,7 +405,7 @@
          Stays hidden when there is nothing to show. Nothing to edit here. -->
     <section class="section clubhouse-latest" id="clubhouse" aria-labelledby="clubhouse-title" data-clubhouse-latest hidden>
       <p class="section-kicker">Ζωή του συλλόγου</p>
-      <h2 id="clubhouse-title">Λέσχη</h2>
+      <h2 class="section-title" id="clubhouse-title">Λέσχη</h2>
       <ul class="post-grid" data-post-grid data-heading="h3"></ul>
       <p class="post-grid-more"><a class="text-link" href="clubhouse/index.html">Όλες οι αναρτήσεις της Λέσχης →</a></p>
     </section>
@@ -419,7 +424,7 @@
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="contact-row">
         <div>
-          <h2 id="contact-title">Έλα σε προπόνηση</h2>
+          <h2 class="section-title" id="contact-title">Έλα σε προπόνηση</h2>
           <p>Στείλε ένα σύντομο μήνυμα πριν έρθεις, ώστε οι προπονητές να οργανώσουν την προπόνηση και να ελέγξουν τα διαθέσιμα νούμερα εξοπλισμού. Αν αποφασίσεις την τελευταία στιγμή, έλα όπως και να ’χει.</p>
         </div>
         <a class="btn btn--gold" href="https://wa.me/35795592946?text=%CE%93%CE%B5%CE%B9%CE%B1%20%CF%83%CE%B1%CF%82%2C%20%CE%B8%CE%B1%20%CE%AE%CE%B8%CE%B5%CE%BB%CE%B1%20%CE%BD%CE%B1%20%CE%AD%CF%81%CE%B8%CF%89%20%CF%83%CE%B5%20%CE%BC%CE%B9%CE%B1%20%CF%80%CF%81%CE%BF%CF%80%CF%8C%CE%BD%CE%B7%CF%83%CE%B7%20%CF%84%CE%B7%CF%82%20Nicosia%20Rugby.%20%CE%A3%CE%B5%20%CF%80%CE%BF%CE%B9%CE%B1%20%CF%80%CF%81%CE%BF%CF%80%CF%8C%CE%BD%CE%B7%CF%83%CE%B7%20%CE%BD%CE%B1%20%CE%AD%CF%81%CE%B8%CF%89%3B" rel="noopener" target="_blank">Στείλε μας μήνυμα στο WhatsApp<span class="visually-hidden"> (ανοίγει σε νέα καρτέλα)</span></a>
