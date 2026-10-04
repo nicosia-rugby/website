@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nicosia-rugby.github.io/website/sitemap.xml
+Sitemap: https://nicosiarugby.com/sitemap.xml

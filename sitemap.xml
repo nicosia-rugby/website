@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://nicosia-rugby.github.io/website/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://nicosia-rugby.github.io/website/"/>
-    <xhtml:link rel="alternate" hreflang="el" href="https://nicosia-rugby.github.io/website/el/"/>
+    <loc>https://nicosiarugby.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicosiarugby.com/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://nicosiarugby.com/el/"/>
   </url>
   <url>
-    <loc>https://nicosia-rugby.github.io/website/el/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://nicosia-rugby.github.io/website/"/>
-    <xhtml:link rel="alternate" hreflang="el" href="https://nicosia-rugby.github.io/website/el/"/>
+    <loc>https://nicosiarugby.com/el/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicosiarugby.com/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://nicosiarugby.com/el/"/>
   </url>
   <url>
-    <loc>https://nicosia-rugby.github.io/website/events.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://nicosia-rugby.github.io/website/events.html"/>
-    <xhtml:link rel="alternate" hreflang="el" href="https://nicosia-rugby.github.io/website/el/events.html"/>
+    <loc>https://nicosiarugby.com/events.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicosiarugby.com/events.html"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://nicosiarugby.com/el/events.html"/>
   </url>
   <url>
-    <loc>https://nicosia-rugby.github.io/website/el/events.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://nicosia-rugby.github.io/website/events.html"/>
-    <xhtml:link rel="alternate" hreflang="el" href="https://nicosia-rugby.github.io/website/el/events.html"/>
+    <loc>https://nicosiarugby.com/el/events.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicosiarugby.com/events.html"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://nicosiarugby.com/el/events.html"/>
   </url>
   <!-- Add the Clubhouse pages when the first post is published:
   <url>
-    <loc>https://nicosia-rugby.github.io/website/clubhouse/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://nicosia-rugby.github.io/website/clubhouse/"/>
-    <xhtml:link rel="alternate" hreflang="el" href="https://nicosia-rugby.github.io/website/el/clubhouse/"/>
+    <loc>https://nicosiarugby.com/clubhouse/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicosiarugby.com/clubhouse/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://nicosiarugby.com/el/clubhouse/"/>
   </url>
   <url>
-    <loc>https://nicosia-rugby.github.io/website/el/clubhouse/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://nicosia-rugby.github.io/website/clubhouse/"/>
-    <xhtml:link rel="alternate" hreflang="el" href="https://nicosia-rugby.github.io/website/el/clubhouse/"/>
+    <loc>https://nicosiarugby.com/el/clubhouse/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nicosiarugby.com/clubhouse/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://nicosiarugby.com/el/clubhouse/"/>
   </url>
   -->
 </urlset>
