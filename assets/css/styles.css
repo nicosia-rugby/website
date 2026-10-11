@@ -922,3 +922,57 @@ figcaption { padding-top: 10px; color: var(--mid-grey); font-size: 13px; font-we
   .site-header, .skip-link, .menu-toggle { display: none; }
   .contact, .site-footer { background: #fff; color: #000; }
 }
+
+
+/* ==========================================================================
+   v6: header row on narrow phones, heading spacing, schedule labels, sponsor links
+   ========================================================================== */
+/* Main and section headings: less compressed letter spacing. */
+h1, h2 { letter-spacing: -.02em; }
+
+/* Phones: more space between lines of multiline section headings. */
+@media (max-width: 900px) {
+  h2, .section-title { line-height: .98; }
+}
+
+/* Training schedule: day · venue labels. */
+.session-meta { font-size: 18px; line-height: 1.3; }
+@media (max-width: 359px) {
+  .session-meta { font-size: 16px; }
+}
+
+/* Narrow phones: club name and Menu/Μενού stay on one row. */
+@media (max-width: 420px) {
+  .header-inner { gap: 8px; }
+  .menu-toggle { flex-shrink: 0; }
+}
+@media (max-width: 374px) {
+  .header-inner { padding-left: 14px; padding-right: 14px; }
+  .brand { gap: 6px; letter-spacing: 0; }
+  .brand img { height: 26px; }
+  .brand span { font-size: 12px; }
+  .menu-toggle { padding: 0 7px; font-size: 13px; }
+  .menu-toggle-bars { width: 16px; margin-right: 5px; }
+}
+@media (max-width: 339px) {
+  .header-inner { padding-left: 10px; padding-right: 10px; }
+  .brand span { font-size: 11px; }
+}
+
+/* Sponsor names link to the sponsor; same look as before. */
+.sponsor-list a { color: inherit; text-decoration: none; }
+.sponsor-list a:hover { text-decoration: underline; }
+
+/* Long single words must still fit with the wider letter spacing:
+   "BACKGROUNDS." (club heading), "CLUBHOUSE" (page title), "ΠΡΟΠΟΝΗΣΕΙΣ" (Ways to play card). */
+@media (min-width: 901px) {
+  .club .section-title { font-size: clamp(44px, 6.4vw, 89px); }
+}
+@media (max-width: 382px) {
+  .club .section-title { font-size: 10.9vw; }
+  .page-hero--compact h1 { font-size: 13.5vw; }
+  .route h4 { font-size: 32px; }
+}
+@media (min-width: 1101px) and (max-width: 1200px) {
+  .route h4 { font-size: 32px; }
+}
