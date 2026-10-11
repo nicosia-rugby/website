@@ -20,7 +20,6 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://nicosiarugby.com/events.html"/>
     <xhtml:link rel="alternate" hreflang="el" href="https://nicosiarugby.com/el/events.html"/>
   </url>
-  <!-- Add the Clubhouse pages when the first post is published:
   <url>
     <loc>https://nicosiarugby.com/clubhouse/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://nicosiarugby.com/clubhouse/"/>
@@ -31,5 +30,4 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://nicosiarugby.com/clubhouse/"/>
     <xhtml:link rel="alternate" hreflang="el" href="https://nicosiarugby.com/el/clubhouse/"/>
   </url>
-  -->
 </urlset>
