@@ -1,0 +1,101 @@
+name: Publish website and test preview
+
+on:
+  push:
+    branches: [main, test]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: nrc-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Read production files
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          path: production-source
+          persist-credentials: false
+
+      # On/off switch: Settings → Secrets and variables → Actions → Variables → PREVIEW = on / off.
+      # After changing it, run this workflow once (Actions → Run workflow) to apply.
+      - name: Select test branch (use main until test is created)
+        id: preview_ref
+        if: ${{ vars.PREVIEW == 'on' }}
+        shell: bash
+        run: |
+          if git -C production-source ls-remote --exit-code origin refs/heads/test > /dev/null; then
+            echo "ref=test" >> "$GITHUB_OUTPUT"
+          else
+            result=$?
+            if [ "$result" -ne 2 ]; then exit "$result"; fi
+            echo "ref=main" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Read test files
+        if: ${{ vars.PREVIEW == 'on' }}
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ steps.preview_ref.outputs.ref }}
+          path: test-source
+          persist-credentials: false
+
+      - name: Prepare production and preview
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          import shutil
+
+          excluded = shutil.ignore_patterns('.git', '.github', 'test', 'README.md')
+          shutil.copytree('production-source', 'published', ignore=excluded)
+          assert Path('published/index.html').is_file(), 'Missing main/index.html'
+          if not Path('test-source').is_dir():
+              raise SystemExit(0)  # Preview switched off: publish the live site only.
+          preview = Path('published/test')
+          shutil.copytree('test-source', preview, ignore=excluded)
+
+          # Preview metadata must not advertise another production sitemap/domain.
+          for name in ('CNAME', 'robots.txt', 'sitemap.xml'):
+              (preview / name).unlink(missing_ok=True)
+
+          # Keep this setting in published previews only, never in source/main.
+          for page in preview.rglob('*.html'):
+              text = page.read_text(encoding='utf-8')
+              text = re.sub(
+                  r'<meta\b(?=[^>]*\bname\s*=\s*[\"\x27]robots[\"\x27])[^>]*>',
+                  '', text, flags=re.I)
+              text = re.sub(r'<head\b[^>]*>',
+                  lambda m: m.group(0) + '\n<meta name="robots" content="noindex">',
+                  text, count=1, flags=re.I)
+              if page == preview / '404.html':
+                  text = text.replace('var root = "/";', 'var root = "/test/";')
+                  text = text.replace('root = "/" + first + "/";',
+                                      'root = "/" + first + "/test/";')
+              page.write_text(text, encoding='utf-8')
+          assert (preview / 'index.html').is_file(), 'Missing test/index.html'
+          PY
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: published
+
+      - name: Publish website
+        id: deployment
+        uses: actions/deploy-pages@v4
