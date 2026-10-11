@@ -12,4 +12,5 @@
    no homepage block. See README.md → Clubhouse.
    ============================================================================ */
 var POSTS = [
+  "06-10-2026-back-on-the-pitch",
 ];
