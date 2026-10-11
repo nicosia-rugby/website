@@ -451,7 +451,7 @@ h3 { margin: 0 0 10px; font-size: 23px; line-height: 1.15; }
   border-right: 1px solid var(--line-grey);
   border-bottom: 1px solid var(--line-grey);
 }
-.fee strong { display: block; font-size: 30px; letter-spacing: -.03em; }
+.fee strong { display: block; font-size: clamp(24px, 7.5vw, 30px); letter-spacing: -.03em; overflow-wrap: normal; word-break: normal; }
 
 /* ---------- Events ---------- */
 .events {
@@ -647,6 +647,7 @@ figcaption { padding-top: 10px; color: var(--mid-grey); font-size: 13px; font-we
 
 @media (max-width: 520px) {
   .header-cta { display: none; }
+  .fee { padding: 18px 14px; }
   .session { padding: 18px; }
   .schedule-title, .schedule-note { padding-left: 18px; padding-right: 18px; }
   .location { padding: 22px; }
