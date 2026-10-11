@@ -28,11 +28,11 @@ jobs:
           path: production-source
           persist-credentials: false
 
-      # On/off switch: Settings → Secrets and variables → Actions → Variables → PREVIEW = on / off.
+      # On/off switch: Settings → Secrets and variables → Actions → Variables → TEST_PREVIEW = on / off.
       # After changing it, run this workflow once (Actions → Run workflow) to apply.
       - name: Select test branch (use main until test is created)
         id: preview_ref
-        if: ${{ vars.PREVIEW == 'on' }}
+        if: ${{ vars.TEST_PREVIEW == 'on' }}
         shell: bash
         run: |
           if git -C production-source ls-remote --exit-code origin refs/heads/test > /dev/null; then
@@ -44,7 +44,7 @@ jobs:
           fi
 
       - name: Read test files
-        if: ${{ vars.PREVIEW == 'on' }}
+        if: ${{ vars.TEST_PREVIEW == 'on' }}
         uses: actions/checkout@v6
         with:
           ref: ${{ steps.preview_ref.outputs.ref }}
