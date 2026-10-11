@@ -28,11 +28,24 @@ jobs:
           path: production-source
           persist-credentials: false
 
-      # On/off switch: Settings → Secrets and variables → Actions → Variables → TEST_PREVIEW = on / off.
+      # On/off switch: Settings → Secrets and variables → Actions → Variables → TEST_PREVIEW.
+      # on / y / yes (any capitalisation) = show the preview; any other value or no variable = hide it.
       # After changing it, run this workflow once (Actions → Run workflow) to apply.
+      - name: Read preview switch
+        id: preview_switch
+        shell: bash
+        env:
+          TEST_PREVIEW: ${{ vars.TEST_PREVIEW }}
+        run: |
+          value="$(printf '%s' "$TEST_PREVIEW" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')"
+          case "$value" in
+            on|y|yes) echo "enabled=true" >> "$GITHUB_OUTPUT"; echo "Preview: on ($TEST_PREVIEW)" ;;
+            *)        echo "enabled=false" >> "$GITHUB_OUTPUT"; echo "Preview: off ($TEST_PREVIEW)" ;;
+          esac
+
       - name: Select test branch (use main until test is created)
         id: preview_ref
-        if: ${{ vars.TEST_PREVIEW == 'on' }}
+        if: ${{ steps.preview_switch.outputs.enabled == 'true' }}
         shell: bash
         run: |
           if git -C production-source ls-remote --exit-code origin refs/heads/test > /dev/null; then
@@ -44,7 +57,7 @@ jobs:
           fi
 
       - name: Read test files
-        if: ${{ vars.TEST_PREVIEW == 'on' }}
+        if: ${{ steps.preview_switch.outputs.enabled == 'true' }}
         uses: actions/checkout@v6
         with:
           ref: ${{ steps.preview_ref.outputs.ref }}

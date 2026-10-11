@@ -71,6 +71,16 @@
     }
   }
 
+  // Event titles: keep a round label and its number together ("Round 2", "2η αγωνιστική").
+  document.querySelectorAll(".event h3, .event-row h3, .event-row h4").forEach(function (h) {
+    h.childNodes.forEach(function (node) {
+      if (node.nodeType !== 3) return;
+      node.nodeValue = node.nodeValue
+        .replace(/\b(Round) (\d+)/g, "$1\u00A0$2")
+        .replace(/(\d+η) (αγωνιστική)/g, "$1\u00A0$2");
+    });
+  });
+
   // Events page: mark past rows; when all are past, show the "next season" message.
   var rows = document.querySelectorAll(".event-row[data-end]");
   if (rows.length) {
