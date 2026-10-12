@@ -977,3 +977,18 @@ h1, h2 { letter-spacing: -.02em; }
 @media (min-width: 1101px) and (max-width: 1200px) {
   .route h4 { font-size: 32px; }
 }
+
+/* Club name in the header ("Nicosia Rugby Club"): about 18% larger at every screen size. */
+.brand span { font-size: 1.18em; }
+@media (max-width: 900px) {
+  .brand span { font-size: 16.5px; }
+}
+@media (max-width: 420px) {
+  .brand span { font-size: 15.3px; }
+}
+@media (max-width: 374px) {
+  .brand span { font-size: 14.1px; }
+}
+@media (max-width: 339px) {
+  .brand span { font-size: 13px; }
+}
