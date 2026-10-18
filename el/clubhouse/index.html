@@ -34,35 +34,7 @@
 <body data-root="../../" data-lang-root="../">
     <a class="skip-link" href="#main">Μετάβαση στο περιεχόμενο</a>
 
-    <header class="site-header">
-        <div class="header-inner">
-            <a class="brand" href="../index.html" aria-label="Nicosia Rugby Club, αρχική σελίδα">
-                <img src="../../assets/images/nrc-mark.png" width="233" height="215" alt="">
-                <span>Nicosia Rugby Club</span>
-            </a>
-
-            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-label-open="Μενού" data-label-close="Κλείσιμο">
-                <span class="menu-toggle-bars" aria-hidden="true"></span><span class="menu-toggle-label">Μενού</span>
-            </button>
-
-            <nav class="primary-nav" id="primary-nav" aria-label="Κύρια πλοήγηση">
-                <ul>
-                    <li><a href="../index.html#training">Προπονήσεις</a></li>
-                    <li><a href="../events.html">Αγώνες</a></li>
-                    <!-- Shown automatically by main.js once clubhouse/posts.js lists at least one post -->
-                    <li data-clubhouse-link hidden><a href="../clubhouse/index.html" aria-current="page">Η Ομάδα</a></li>
-                    <li class="nav-lang-mobile"><span class="visually-hidden">Γλώσσα: </span><a href="../../clubhouse/index.html" lang="en" hreflang="en">EN</a><span aria-hidden="true">/</span><a href="index.html" lang="el" hreflang="el" aria-current="true">GR</a></li>
-                    <li class="nav-cta-mobile"><a class="btn" href="#contact">Κόπιασε!</a></li>
-                </ul>
-            </nav>
-
-            <div class="lang-switch" role="group" aria-label="Γλώσσα">
-                <a href="../../clubhouse/index.html" lang="en" hreflang="en">EN</a><span aria-hidden="true">/</span><a href="index.html" lang="el" hreflang="el" aria-current="true">GR</a>
-            </div>
-
-            <a class="btn header-cta" href="#contact">Κόπιασε!</a>
-        </div>
-    </header>
+    <div id="header-el"></div>
 
     <main id="main">
         <section class="page-hero page-hero--compact" aria-labelledby="page-title">
@@ -77,21 +49,7 @@
             <noscript><p class="post-status">Οι αναρτήσεις χρειάζονται JavaScript για να εμφανιστούν. <a href="https://www.instagram.com/nicosiarugby/">Δες τα νέα μας στο Instagram</a>.</p></noscript>
         </section>
 
-        <!-- CONTACT LINKS: identical on every page (EN and GR). WhatsApp: wa.me/35795592946 with a pre-filled message. -->
-        <section class="section contact" id="contact" aria-labelledby="contact-title">
-            <div class="contact-row">
-                <div>
-                    <h2 class="section-title" id="contact-title">Κόπιασε!</h2>
-                    <p>Στείλε ένα σύντομο μήνυμα πριν έρθεις, ώστε οι προπονητές να οργανώσουν την προπόνηση και να ελέγξουν τον εξοπλισμό για διαθέσιμα νούμερα. Αν αποφασίσεις την τελευταία στιγμή, έλα όπως και να ’χει.</p>
-                </div>
-                <a class="btn btn--gold" href="https://wa.me/35795592946?text=%CE%93%CE%B5%CE%B9%CE%B1%20%CF%83%CE%B1%CF%82%2C%20%CE%B8%CE%B1%20%CE%AE%CE%B8%CE%B5%CE%BB%CE%B1%20%CE%BD%CE%B1%20%CE%AD%CF%81%CE%B8%CF%89%20%CF%83%CE%B5%20%CE%BC%CE%B9%CE%B1%20%CF%80%CF%81%CE%BF%CF%80%CF%8C%CE%BD%CE%B7%CF%83%CE%B7%20%CF%84%CE%B7%CF%82%20Nicosia%20Rugby.%20%CE%A3%CE%B5%20%CF%80%CE%BF%CE%B9%CE%B1%20%CF%80%CF%81%CE%BF%CF%80%CF%8C%CE%BD%CE%B7%CF%83%CE%B7%20%CE%BD%CE%B1%20%CE%AD%CF%81%CE%B8%CF%89%3B" rel="noopener" target="_blank">Στείλε μας μήνυμα στο WhatsApp<span class="visually-hidden"> (ανοίγει σε νέα καρτέλα)</span></a>
-            </div>
-            <ul class="contact-links" aria-label="Άλλοι τρόποι επικοινωνίας">
-                <li><a class="btn btn--outline-light" href="https://www.instagram.com/nicosiarugby/" rel="noopener" target="_blank">Instagram<span class="visually-hidden">: @nicosiarugby (ανοίγει σε νέα καρτέλα)</span></a></li>
-                <li><a class="btn btn--outline-light" href="https://www.facebook.com/nicosiarugby/" rel="noopener" target="_blank">Facebook<span class="visually-hidden">: Nicosia Rugby Club (ανοίγει σε νέα καρτέλα)</span></a></li>
-                <li><a class="btn btn--outline-light" href="mailto:nicosia@cyprus-rugby.com"><span class="visually-hidden">Email: </span>nicosia@cyprus-rugby.com</a></li>
-            </ul>
-        </section>
+        <div id="contact-el"></div>
     </main>
 
     <div id="footer-el"></div>

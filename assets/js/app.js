@@ -16,7 +16,10 @@ async function loadComponent(selector, file) {
 
 async function init() {
     await Promise.all([
-        loadComponent("#footer-el", "/test/el/components/footer.html")
+        loadComponent("#header-el", "/test/el/components/header.html"),
+        loadComponent("#footer-el", "/test/el/components/footer.html"),
+        loadComponent("#contact-el", "/test/el/components/contact.html"),
+        loadComponent("#sponsors-el", "/test/el/components/sponsors.html")
     ]);
 }
 
