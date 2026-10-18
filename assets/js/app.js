@@ -16,7 +16,6 @@ async function loadComponent(selector, file) {
 
 async function init() {
     await Promise.all([
-        loadComponent("#header-el", "el/components/header.html"),
         loadComponent("#footer-el", "el/components/footer.html")
     ]);
 }
