@@ -6,7 +6,7 @@
 (function () {
   "use strict";
 
-  var CAL_ID = "nicosia@cyprus-rugby.com";
+  var CAL_ID = "c_f53db125d62c076aa25edcbc4182f3c4c035934b5eeec58315bb278a544a8b0b@group.calendar.google.com";
   var API_KEY = "AIzaSyCZc2zCHYsx0ekIIkN-2AKaGhTjhyWpjtw"; // restricted to Calendar API + nicosiarugby.com/*
   var MAX = 6;
   var TIME_ZONE = "Asia/Nicosia";
