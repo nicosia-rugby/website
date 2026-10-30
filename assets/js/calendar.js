@@ -11,6 +11,9 @@
   var MAX = 6;
   var TIME_ZONE = "Asia/Nicosia";
   var LOCALE = "el-GR";
+  // Debug: add ?caldebug to the page URL to log the request and response in the console.
+  var DEBUG = /[?&]caldebug\b/.test(location.search);
+  function log() { if (DEBUG) console.log.apply(console, ["[calendar]"].concat([].slice.call(arguments))); }
 
   var TEXT = {
     loading: "Φόρτωση προγράμματος…",
@@ -124,13 +127,21 @@
   var url = "https://www.googleapis.com/calendar/v3/calendars/" + encodeURIComponent(CAL_ID) + "/events?" + params;
 
   status.textContent = TEXT.loading;
+  log("CAL_ID:", CAL_ID);
+  log("Request:", url);
 
   fetch(url)
     .then(function (res) {
-      if (!res.ok) throw new Error("Calendar API " + res.status);
+      log("HTTP status:", res.status);
+      if (!res.ok) {
+        return res.text().then(function (body) { log("Error body:", body); throw new Error("Calendar API " + res.status); });
+      }
       return res.json();
     })
-    .then(function (data) { render(Array.isArray(data.items) ? data.items : []); })
+    .then(function (data) {
+      log("accessRole:", data.accessRole, "| items:", (data.items || []).length, data);
+      render(Array.isArray(data.items) ? data.items : []);
+    })
     .catch(function (err) {
       console.warn(err);
       showError();
