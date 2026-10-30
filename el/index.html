@@ -52,6 +52,7 @@
     <script src="../clubhouse/posts.js" defer></script>
     <script src="../assets/js/main.js" defer></script>
     <script src="../assets/js/app.js" defer></script>
+    <script src="../assets/js/calendar.js" defer></script>
 </head>
 <body data-root="../" data-lang-root="">
     <a class="skip-link" href="#main">Μετάβαση στο περιεχόμενο</a>
@@ -171,6 +172,15 @@
                     <p class="map-link"><a href="https://maps.app.goo.gl/iXyf53tufRQ4KVU59" rel="noopener" target="_blank">Άνοιγμα στο Google Maps: Spazio<span class="visually-hidden"> (ανοίγει σε νέα καρτέλα)</span></a></p>
                 </article>
             </div>
+
+            <!-- ============ UPCOMING SESSIONS (Google Calendar) ============ -->
+            <!-- Filled by assets/js/calendar.js. Config and texts are at the top of that file. -->
+            <section class="cal" id="calendar" aria-labelledby="calendar-title">
+                <h3 class="subhead" id="calendar-title">Επόμενες προπονήσεις</h3>
+                <p class="cal-status" data-cal-status aria-live="polite">Φόρτωση προγράμματος…</p>
+                <ul class="cal-list" data-cal-list aria-labelledby="calendar-title" aria-live="polite" hidden></ul>
+                <p class="cal-actions"><a class="btn" href="https://calendar.google.com/calendar/u/0/r?cid=nicosia@cyprus-rugby.com" target="_blank" rel="noopener">Πρόσθεσε στο Google Calendar<span class="visually-hidden"> (ανοίγει σε νέα καρτέλα)</span></a></p>
+            </section>
 
             <!-- ============ WAYS TO PLAY ============ -->
             <h3 class="subhead" id="play-title">Τρόποι να παίξεις</h3>
