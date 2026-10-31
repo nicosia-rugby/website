@@ -992,3 +992,7 @@ h1, h2 { letter-spacing: -.02em; }
 @media (max-width: 339px) {
   .brand span { font-size: 13px; }
 }
+
+/* Fixtures from Google Calendar (assets/js/fixtures.js): disclaimer and calendar link. */
+.fixtures-note + .fixtures-note,
+.fixtures-note + .source { margin-top: 8px; }
