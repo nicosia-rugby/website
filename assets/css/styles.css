@@ -993,6 +993,9 @@ h1, h2 { letter-spacing: -.02em; }
   .brand span { font-size: 13px; }
 }
 
-/* Fixtures from Google Calendar (assets/js/fixtures.js): disclaimer and calendar link. */
-.fixtures-note + .fixtures-note,
+/* Fixtures from Google Calendar (assets/js/fixtures.js). */
 .fixtures-note + .source { margin-top: 8px; }
+@media (min-width: 901px) {
+  /* Homepage next games: three equal columns whatever the title length. */
+  .events--upcoming { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

@@ -50,13 +50,53 @@
     }
   };
 
-  /* ---------- Label / status hooks ----------
-     Google Calendar has no label or status field, so both return null and cards show neither.
-     To add a rule later, return e.g. { text: "Nicosia players with Ayia Napa Lions", modifier: "nicosia" }
-     (modifier: "nicosia" | "applied" | "cyprus", matching the existing .event-label--* classes;
-     "nicosia" also gives the navy card / row marker) or, for status, a short string. */
-  function getLabel(event, lang) { return null; }
+  /* ---------- Labels ----------
+     Convention: one line in the Calendar event description, e.g.
+       Label: nicosia
+     The key after "Label:" picks an entry below (case-insensitive). Unknown or missing key = no label.
+     These are the original production labels and classes (.event-label--*);
+     "nicosia" also gives the navy card (.event--nicosia) / row marker (.event-row--nicosia). */
+  var LABELS = {
+    nicosia: { modifier: "nicosia", en: "Nicosia players with Ayia Napa Lions", el: "Παίκτες της Nicosia με τους Ayia Napa Lions" },
+    applied: { modifier: "applied", en: "Nicosia entry applied", el: "Αίτηση συμμετοχής της Nicosia" },
+    cyprus:  { modifier: "cyprus",  en: "Cyprus Rugby event",   el: "Διοργάνωση Cyprus Rugby" }
+  };
+
+  // Calendar descriptions may be plain text or simple HTML: read them as plain lines.
+  function descriptionLines(event) {
+    return String(event.description || "")
+      .replace(/<br\s*\/?>|<\/(p|div|li)>/gi, "\n")
+      .replace(/<[^>]*>/g, "")
+      .replace(/&nbsp;/g, " ")
+      .split("\n");
+  }
+
+  function getLabel(event, lang) {
+    var lines = descriptionLines(event);
+    for (var i = 0; i < lines.length; i++) {
+      var m = /^\s*label\s*:\s*(\S+)\s*$/i.exec(lines[i]);
+      if (m) {
+        var def = LABELS[m[1].toLowerCase()];
+        return def ? { text: def[lang], modifier: def.modifier } : null;
+      }
+    }
+    return null;
+  }
+
+  // No status data in Calendar: no status line is shown.
   function getStatus(event, lang) { return null; }
+
+  /* ---------- Venue (homepage cards) ----------
+     Calendar "location" is one free-text string ("Name, Plus Code, area, postcode, country").
+     Cards show its first segment only when it looks like a name: not a Plus Code,
+     not starting with a number (street number / postcode). Otherwise no venue is shown. */
+  var PLUS_CODE = /\b[23456789CFGHJMPQRVWX]{2,8}\+[23456789CFGHJMPQRVWX]{0,3}\b/i;
+
+  function venueName(location) {
+    var first = String(location || "").split(",")[0].trim();
+    if (!first || PLUS_CODE.test(first) || /^\d/.test(first)) return "";
+    return first;
+  }
 
   /* ---------- Setup ---------- */
   var LANG = (document.documentElement.lang || "en").slice(0, 2) === "el" ? "el" : "en";
@@ -228,7 +268,8 @@
     time.dateTime = game.isoDate;
     meta.appendChild(time);
     body.appendChild(meta);
-    if (game.venue) body.appendChild(el("p", "event-meta", game.venue));
+    var venue = venueName(game.venue);
+    if (venue) body.appendChild(el("p", "event-meta", venue));
     var status = getStatus(game.raw, LANG);
     if (status) body.appendChild(el("p", "event-status", status));
     li.appendChild(body);
