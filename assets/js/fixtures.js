@@ -86,7 +86,7 @@
   // No status data in Calendar: no status line is shown.
   function getStatus(event, lang) { return null; }
 
-  /* ---------- Venue (homepage cards) ----------
+  /* ---------- Venue ----------
      Calendar "location" is one free-text string ("Name, Plus Code, area, postcode, country").
      Cards show its first segment only when it looks like a name: not a Plus Code,
      not starting with a number (street number / postcode). Otherwise no venue is shown. */
@@ -94,8 +94,29 @@
 
   function venueName(location) {
     var first = String(location || "").split(",")[0].trim();
-    if (!first || PLUS_CODE.test(first) || /^\d/.test(first)) return "";
+    if (!first || PLUS_CODE.test(first) || /^\d/.test(first) || /^https?:/i.test(first)) return "";
     return first;
+  }
+
+  /* Google Maps link for a Calendar location (homepage and events page).
+     A Google Maps URL is used as is; plain text becomes a Maps search
+     (official Maps URLs format, full location string, so the pin is exact).
+     Any other URL (e.g. a video call) gets no link. */
+  function mapsUrl(location) {
+    var loc = String(location || "").trim();
+    if (!loc) return "";
+    if (/^https:\/\/(maps\.app\.goo\.gl|goo\.gl\/maps|(www\.)?google\.[a-z.]+\/maps)\//i.test(loc)) return loc;
+    if (/^[a-z]+:\/\//i.test(loc)) return "";
+    return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(loc);
+  }
+
+  // Venue text, linked to Google Maps when possible.
+  function venueNode(tag, className, text, location) {
+    var node = el(tag, className);
+    var url = mapsUrl(location);
+    if (url) node.appendChild(externalLink(url, text));
+    else node.textContent = text;
+    return node;
   }
 
   /* ---------- Setup ---------- */
@@ -269,7 +290,7 @@
     meta.appendChild(time);
     body.appendChild(meta);
     var venue = venueName(game.venue);
-    if (venue) body.appendChild(el("p", "event-meta", venue));
+    if (venue) body.appendChild(venueNode("p", "event-meta", venue, game.venue));
     var status = getStatus(game.raw, LANG);
     if (status) body.appendChild(el("p", "event-status", status));
     li.appendChild(body);
@@ -292,7 +313,7 @@
     li.appendChild(body);
     var dl = el("dl");
     if (game.time) { dl.appendChild(el("dt", null, T.kickoff)); dl.appendChild(el("dd", null, game.time)); }
-    if (game.venue) { dl.appendChild(el("dt", null, T.venue)); dl.appendChild(el("dd", null, game.venue)); }
+    if (game.venue) { dl.appendChild(el("dt", null, T.venue)); dl.appendChild(venueNode("dd", null, game.venue, game.venue)); }
     var status = getStatus(game.raw, LANG);
     if (status) { dl.appendChild(el("dt", null, T.status)); dl.appendChild(el("dd", null, status)); }
     li.appendChild(dl);
