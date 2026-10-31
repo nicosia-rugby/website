@@ -51,6 +51,7 @@
   <link rel="stylesheet" href="../assets/css/styles.css">
   <script src="../clubhouse/posts.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/fixtures.js" defer></script>
 </head>
 <body data-root="../" data-lang-root="">
   <a class="skip-link" href="#main">Μετάβαση στο περιεχόμενο</a>
@@ -213,169 +214,14 @@
     </section>
 
     <!-- ============ EVENTS PREVIEW ============ -->
-    <!-- SEASONAL UPDATE: Nicosia events only, in date order. The page shows the next three;
-         past events are hidden automatically. Keep in step with events.html. -->
+    <!-- Games come from Google Calendar (assets/js/fixtures.js). Nothing to edit here. -->
     <section class="section" id="events" aria-labelledby="events-title">
       <h2 class="section-title" id="events-title">Επόμενοι αγώνες</h2>
-      <ul class="events events--upcoming">
-        <li class="event event--nicosia" data-end="2026-10-10">
-          <span class="event-label event-label--nicosia">Παίκτες της Nicosia με τους Ayia Napa Lions</span>
-          <div>
-            <h3>Πρωτάθλημα XV Ανδρών, 1η αγωνιστική</h3>
-            <p class="event-meta"><time datetime="2026-10-10">Σάββατο 10 Οκτωβρίου 2026, 14:00</time></p>
-            <p class="event-match">4 Scots RC – Ayia Napa Lions RUFC</p>
-            <p class="event-status">Επιβεβαιωμένο</p>
-          </div>
-        </li>
-        <li class="event event--nicosia" data-end="2026-10-31">
-          <span class="event-label event-label--nicosia">Παίκτες της Nicosia με τους Ayia Napa Lions</span>
-          <div>
-            <h3>Πρωτάθλημα XV Ανδρών, 2η αγωνιστική</h3>
-            <p class="event-meta"><time datetime="2026-10-31">Σάββατο 31 Οκτωβρίου 2026, 14:00</time></p>
-            <p class="event-match">RAF Akrotiri Flamingos RC – Ayia Napa Lions RUFC</p>
-            <p class="event-status">Επιβεβαιωμένο</p>
-          </div>
-        </li>
-        <li class="event" data-end="2026-11-07">
-          <span class="event-label event-label--applied">Αίτηση συμμετοχής της Nicosia</span>
-          <div>
-            <h3>Open Touch (μικτό)</h3>
-            <p class="event-meta"><time datetime="2026-11-07">Σάββατο 7 Νοεμβρίου 2026</time></p>
-
-            <p class="event-status">Η συμμετοχή της Nicosia επιβεβαιώθηκε</p>
-          </div>
-        </li>
-        <li class="event event--nicosia" data-end="2026-11-07">
-          <span class="event-label event-label--nicosia">Παίκτες της Nicosia με τους Ayia Napa Lions</span>
-          <div>
-            <h3>Πρωτάθλημα XV Ανδρών, 3η αγωνιστική</h3>
-            <p class="event-meta"><time datetime="2026-11-07">Σάββατο 7 Νοεμβρίου 2026, 14:00</time></p>
-            <p class="event-match">Ayia Napa Lions RUFC – AEL Limassol Rugby</p>
-            <p class="event-status">Επιβεβαιωμένο</p>
-          </div>
-        </li>
-        <li class="event" data-end="2026-11-14">
-          <span class="event-label event-label--applied">Αίτηση συμμετοχής της Nicosia</span>
-          <div>
-            <h3>Open Touch (μικτό)</h3>
-            <p class="event-meta"><time datetime="2026-11-14">Σάββατο 14 Νοεμβρίου 2026</time></p>
-
-            <p class="event-status">Η συμμετοχή της Nicosia αναμένει επιβεβαίωση</p>
-          </div>
-        </li>
-        <li class="event event--nicosia" data-end="2026-12-05">
-          <span class="event-label event-label--nicosia">Παίκτες της Nicosia με τους Ayia Napa Lions</span>
-          <div>
-            <h3>Πρωτάθλημα XV Ανδρών, 4η αγωνιστική</h3>
-            <p class="event-meta"><time datetime="2026-12-05">Σάββατο 5 Δεκεμβρίου 2026, 14:00</time></p>
-            <p class="event-match">Ayia Napa Lions RUFC – 1 Welsh Guards</p>
-            <p class="event-status">Επιβεβαιωμένο</p>
-          </div>
-        </li>
-        <li class="event event--nicosia" data-end="2027-01-16">
-          <span class="event-label event-label--nicosia">Παίκτες της Nicosia με τους Ayia Napa Lions</span>
-          <div>
-            <h3>Πρωτάθλημα XV Ανδρών, 6η αγωνιστική</h3>
-            <p class="event-meta"><time datetime="2027-01-16">Σάββατο 16 Ιανουαρίου 2027, 14:00</time></p>
-            <p class="event-match">Ayia Napa Lions RUFC – 4 Scots RC</p>
-            <p class="event-status">Επιβεβαιωμένο</p>
-          </div>
-        </li>
-        <li class="event event--nicosia" data-end="2027-01-23">
-          <span class="event-label event-label--nicosia">Παίκτες της Nicosia με τους Ayia Napa Lions</span>
-          <div>
-            <h3>Πρωτάθλημα XV Ανδρών, 7η αγωνιστική</h3>
-            <p class="event-meta"><time datetime="2027-01-23">Σάββατο 23 Ιανουαρίου 2027, 14:00</time></p>
-            <p class="event-match">Ayia Napa Lions RUFC – RAF Akrotiri Flamingos RC</p>
-            <p class="event-status">Επιβεβαιωμένο</p>
-          </div>
-        </li>
-        <li class="event" data-end="2027-01-30">
-          <span class="event-label event-label--applied">Αίτηση συμμετοχής της Nicosia</span>
-          <div>
-            <h3>Open Touch (μικτό)</h3>
-            <p class="event-meta"><time datetime="2027-01-30">Σάββατο 30 Ιανουαρίου 2027</time></p>
-
-            <p class="event-status">Η συμμετοχή της Nicosia αναμένει επιβεβαίωση</p>
-          </div>
-        </li>
-        <li class="event event--nicosia" data-end="2027-02-06">
-          <span class="event-label event-label--nicosia">Παίκτες της Nicosia με τους Ayia Napa Lions</span>
-          <div>
-            <h3>Πρωτάθλημα XV Ανδρών, 8η αγωνιστική</h3>
-            <p class="event-meta"><time datetime="2027-02-06">Σάββατο 6 Φεβρουαρίου 2027, 14:00</time></p>
-            <p class="event-match">AEL Limassol Rugby – Ayia Napa Lions RUFC</p>
-            <p class="event-status">Επιβεβαιωμένο</p>
-          </div>
-        </li>
-        <li class="event event--nicosia" data-end="2027-02-13">
-          <span class="event-label event-label--nicosia">Παίκτες της Nicosia με τους Ayia Napa Lions</span>
-          <div>
-            <h3>Πρωτάθλημα XV Ανδρών, 9η αγωνιστική</h3>
-            <p class="event-meta"><time datetime="2027-02-13">Σάββατο 13 Φεβρουαρίου 2027, 14:00</time></p>
-            <p class="event-match">1 Welsh Guards – Ayia Napa Lions RUFC</p>
-            <p class="event-status">Επιβεβαιωμένο</p>
-          </div>
-        </li>
-        <li class="event" data-end="2027-02-20">
-          <span class="event-label event-label--applied">Αίτηση συμμετοχής της Nicosia</span>
-          <div>
-            <h3>Open Touch (μικτό)</h3>
-            <p class="event-meta"><time datetime="2027-02-20">Σάββατο 20 Φεβρουαρίου 2027</time></p>
-
-            <p class="event-status">Η συμμετοχή της Nicosia αναμένει επιβεβαίωση</p>
-          </div>
-        </li>
-        <li class="event" data-end="2027-03-13">
-          <span class="event-label event-label--applied">Αίτηση συμμετοχής της Nicosia</span>
-          <div>
-            <h3>Open Touch (μικτό)</h3>
-            <p class="event-meta"><time datetime="2027-03-13">Σάββατο 13 Μαρτίου 2027</time></p>
-
-            <p class="event-status">Η συμμετοχή της Nicosia αναμένει επιβεβαίωση</p>
-          </div>
-        </li>
-        <li class="event" data-end="2027-04-10">
-          <span class="event-label event-label--applied">Αίτηση συμμετοχής της Nicosia</span>
-          <div>
-            <h3>Open Touch (μικτό)</h3>
-            <p class="event-meta"><time datetime="2027-04-10">Σάββατο 10 Απριλίου 2027</time></p>
-
-            <p class="event-status">Η συμμετοχή της Nicosia αναμένει επιβεβαίωση</p>
-          </div>
-        </li>
-        <li class="event" data-end="2027-04-10">
-          <span class="event-label event-label--applied">Αίτηση συμμετοχής της Nicosia</span>
-          <div>
-            <h3>7s ανδρών</h3>
-            <p class="event-meta"><time datetime="2027-04-10">Σάββατο 10 Απριλίου 2027</time></p>
-
-            <p class="event-status">Η συμμετοχή της Nicosia αναμένει επιβεβαίωση</p>
-          </div>
-        </li>
-        <li class="event" data-end="2027-04-17">
-          <span class="event-label event-label--applied">Αίτηση συμμετοχής της Nicosia</span>
-          <div>
-            <h3>7s ανδρών</h3>
-            <p class="event-meta"><time datetime="2027-04-17">Σάββατο 17 Απριλίου 2027</time></p>
-
-            <p class="event-status">Η συμμετοχή της Nicosia αναμένει επιβεβαίωση</p>
-          </div>
-        </li>
-        <li class="event" data-end="2027-04-24">
-          <span class="event-label event-label--applied">Αίτηση συμμετοχής της Nicosia</span>
-          <div>
-            <h3>7s ανδρών</h3>
-            <p class="event-meta"><time datetime="2027-04-24">Σάββατο 24 Απριλίου 2027</time></p>
-
-            <p class="event-status">Η συμμετοχή της Nicosia αναμένει επιβεβαίωση</p>
-          </div>
-        </li>
-      </ul>
-      <div class="empty-state" data-season-over hidden>
-          <p>Το πρόγραμμα της επόμενης σεζόν έρχεται σύντομα.</p>
-          <p><a href="https://wa.me/35795592946?text=%CE%93%CE%B5%CE%B9%CE%B1%20%CF%83%CE%B1%CF%82%2C%20%CE%B8%CE%B1%20%CE%AE%CE%B8%CE%B5%CE%BB%CE%B1%20%CE%BD%CE%B1%20%CE%AD%CF%81%CE%B8%CF%89%20%CF%83%CE%B5%20%CE%BC%CE%B9%CE%B1%20%CF%80%CF%81%CE%BF%CF%80%CF%8C%CE%BD%CE%B7%CF%83%CE%B7%20%CF%84%CE%B7%CF%82%20Nicosia%20Rugby.%20%CE%A3%CE%B5%20%CF%80%CE%BF%CE%B9%CE%B1%20%CF%80%CF%81%CE%BF%CF%80%CF%8C%CE%BD%CE%B7%CF%83%CE%B7%20%CE%BD%CE%B1%20%CE%AD%CF%81%CE%B8%CF%89%3B" rel="noopener" target="_blank">Στείλε μας μήνυμα στο WhatsApp και θα σε ενημερώσουμε πρώτα<span class="visually-hidden"> (ανοίγει σε νέα καρτέλα)</span></a></p>
-        </div>
+      <div data-fixtures="next" data-count="3">
+        <div data-fixtures-status role="status"></div>
+        <ul class="events events--upcoming" data-fixtures-list hidden></ul>
+      </div>
+      <p class="source fixtures-note"><a href="https://calendar.google.com/calendar/u/0/r?cid=c_f53db125d62c076aa25edcbc4182f3c4c035934b5eeec58315bb278a544a8b0b%40group.calendar.google.com" target="_blank" rel="noopener" data-fixtures-subscribe>Προσθήκη στο Google Calendar<span class="visually-hidden"> (ανοίγει σε νέα καρτέλα)</span></a></p>
       <a class="text-link" href="events.html">Δες όλο το πρόγραμμα της σεζόν →</a>
     </section>
 
