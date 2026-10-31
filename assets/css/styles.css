@@ -55,7 +55,7 @@ p:last-child { margin-bottom: 0; }
 .on-dark :focus-visible,
 .contact :focus-visible,
 .site-footer :focus-visible,
-.event--nicosia :focus-visible {
+.fixture--15s :focus-visible {
   outline-color: var(--gold);
 }
 
@@ -477,35 +477,8 @@ h3 { margin: 0 0 10px; font-size: 23px; line-height: 1.15; }
 .event-meta { color: var(--text-on-grey); }
 .event-status { margin-top: 6px; font-size: 14px; font-weight: 800; }
 
-.event-label {
-  display: inline-block;
-  align-self: flex-start;
-  padding: 4px 8px;
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-  border: 1px solid currentColor;
-}
-.event-label--nicosia { background: var(--gold); border-color: var(--gold); color: var(--black); }
-.event-label--cyprus { color: var(--navy); }
-
-/* Events with Nicosia participating are shown in navy. */
-.event--nicosia { background: var(--navy); color: var(--white); }
-.event--nicosia .event-meta { color: var(--muted-on-dark); }
-
 /* ---------- Events page list ---------- */
 .section--tight { padding-top: 36px; padding-bottom: 36px; }
-.label-key {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  margin: 0 0 8px;
-  background: var(--line-grey);
-  border: 1px solid var(--line-grey);
-}
-.label-key > div { padding: 24px; background: var(--white); }
-.label-key p { margin: 12px 0 0; }
 
 .empty-state {
   padding: 30px;
@@ -636,7 +609,7 @@ figcaption { padding-top: 10px; color: var(--mid-grey); font-size: 13px; font-we
   .facts li:nth-child(2) { border-right: 0; }
   .facts li:nth-child(-n+2) { border-bottom: 1px solid var(--line-grey); }
 
-  .first-grid, .locations, .club, .contact-row, .label-key { grid-template-columns: 1fr; }
+  .first-grid, .locations, .club, .contact-row { grid-template-columns: 1fr; }
   .first-copy, .notice { padding: 24px; }
   .routes, .events { grid-template-columns: 1fr; }
   .route { min-height: 0; }
@@ -671,18 +644,11 @@ figcaption { padding-top: 10px; color: var(--mid-grey); font-size: 13px; font-we
 .lang-switch a[aria-current="true"] { color: var(--black); box-shadow: inset 0 -3px 0 var(--gold); }
 .nav-lang-mobile { display: none; }
 
-/* Entry applied: participation not yet confirmed. */
-.event-label--applied { background: var(--white); border: 2px solid var(--gold); color: var(--black); }
-
-.event-match { font-weight: 800; }
-.event--nicosia .event-match { color: var(--white); }
-
 /* Homepage preview: show the next three only. */
 .events--upcoming > li:nth-child(n+4) { display: none; }
 .events--upcoming[hidden], [data-season-over][hidden] { display: none; }
 .season-over { margin-bottom: 28px; }
 
-.label-key { grid-template-columns: repeat(3, 1fr); }
 .routes--three { grid-template-columns: repeat(3, 1fr); }
 .routes--three h3 {
   margin: 0 0 8px;
@@ -708,9 +674,7 @@ figcaption { padding-top: 10px; color: var(--mid-grey); font-size: 13px; font-we
 .event-list { border-top: 0; }
 .event-row h4 { margin: 10px 0 6px; font-size: 21px; line-height: 1.2; }
 .event-row { padding-left: 20px; padding-right: 4px; }
-.event-row--nicosia { box-shadow: inset 6px 0 0 var(--navy); }
 .event-row.is-past { color: var(--mid-grey); }
-.event-row.is-past .event-label { opacity: .7; }
 .past-tag {
   display: inline-block;
   margin-left: 8px;
@@ -770,7 +734,7 @@ figcaption { padding-top: 10px; color: var(--mid-grey); font-size: 13px; font-we
   .nav-lang-mobile { display: flex; gap: 4px; align-items: center; }
   .nav-lang-mobile a { min-height: 48px; padding: 0 10px !important; width: auto !important; font-size: 16px !important; }
   .js .primary-nav .nav-lang-mobile a { width: auto; }
-  .label-key, .routes--three, .sponsor-list { grid-template-columns: 1fr; }
+  .routes--three, .sponsor-list { grid-template-columns: 1fr; }
   .event-row { padding-left: 16px; }
 }
 @media (max-width: 420px) {
@@ -868,7 +832,7 @@ figcaption { padding-top: 10px; color: var(--mid-grey); font-size: 13px; font-we
    v4: overflow guards, desktop headline scale, membership columns
    ========================================================================== */
 .hero-grid > *, .first-grid > *, .locations > *, .location, .club > *,
-.contact-row > *, .routes > *, .events > *, .label-key > * { min-width: 0; }
+.contact-row > *, .routes > *, .events > * { min-width: 0; }
 
 @media (min-width: 1101px) {
   .fees { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -999,3 +963,24 @@ h1, h2 { letter-spacing: -.02em; }
   /* Homepage next games: three equal columns whatever the title length. */
   .events--upcoming { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+
+/* Format colours (class set by fixtures.js from the Calendar "label:" line).
+   Accent = the inset bar the site already uses for marked rows: top of a card, left of a row.
+   Unclassified games keep the default .event / .event-row look. */
+.fixture--touch { --fx-bg: #ffffff; --fx-text: #142f5a; --fx-muted: #4b5561; --fx-accent: #e5ae00; }
+.fixture--15s   { --fx-bg: #142f5a; --fx-text: #ffffff; --fx-muted: var(--muted-on-dark); --fx-accent: #e5ae00; }
+.fixture--7s    { --fx-bg: #e9edf2; --fx-text: #142f5a; --fx-muted: #4b5561; --fx-accent: #142f5a; }
+
+.event.fixture--touch, .event.fixture--15s, .event.fixture--7s {
+  background: var(--fx-bg);
+  color: var(--fx-text);
+  box-shadow: inset 0 6px 0 var(--fx-accent);
+}
+.event-row.fixture--touch, .event-row.fixture--15s, .event-row.fixture--7s {
+  background: var(--fx-bg);
+  color: var(--fx-text);
+  box-shadow: inset 6px 0 0 var(--fx-accent);
+  padding-right: 20px;
+}
+.event[class*="fixture--"] .event-meta,
+.event-row[class*="fixture--"] dt { color: var(--fx-muted); }

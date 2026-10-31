@@ -4,7 +4,6 @@
      [data-fixtures="next"]    homepage: next games as cards (data-count = how many)
      [data-fixtures="season"]  events page: upcoming games as rows, grouped by month
      [data-fixtures-past]      events page: section for past games (stays hidden if none)
-     [data-fixtures-labels]    events page: label legend (stays hidden until getLabel() returns labels)
      [data-fixtures-subscribe] "Add to Google Calendar" link (href set from CAL_ID)
    Language comes from <html lang>. Vanilla JS, no build step. */
 (function () {
@@ -31,7 +30,6 @@
       errorEnd: ".",
       kickoff: "Kick-off",
       venue: "Venue",
-      status: "Status",
       newTab: " (opens in a new tab)"
     },
     el: {
@@ -45,46 +43,68 @@
       errorEnd: ".",
       kickoff: "Έναρξη",
       venue: "Γήπεδο",
-      status: "Κατάσταση",
       newTab: " (ανοίγει σε νέα καρτέλα)"
     }
   };
 
-  /* ---------- Labels ----------
-     Convention: one line in the Calendar event description, e.g.
-       Label: nicosia
-     The key after "Label:" picks an entry below (case-insensitive). Unknown or missing key = no label.
-     These are the original production labels and classes (.event-label--*);
-     "nicosia" also gives the navy card (.event--nicosia) / row marker (.event-row--nicosia). */
-  var LABELS = {
-    nicosia: { modifier: "nicosia", en: "Nicosia players with Ayia Napa Lions", el: "Παίκτες της Nicosia με τους Ayia Napa Lions" },
-    applied: { modifier: "applied", en: "Nicosia entry applied", el: "Αίτηση συμμετοχής της Nicosia" },
-    cyprus:  { modifier: "cyprus",  en: "Cyprus Rugby event",   el: "Διοργάνωση Cyprus Rugby" }
+  /* ---------- Rugby format (colours only) ----------
+     Set in the Calendar event description with one line, e.g.  label: touch
+     Key and value are case-insensitive; spaces around them are ignored. The line is never shown.
+     Each value maps to a CSS class (.fixture--*) that sets the card / row colours.
+     To add a format: add an entry here and a .fixture--<class> rule in styles.css. */
+  var FORMATS = {
+    "touch": "touch",
+    "15s": "15s",
+    "7s": "7s"
   };
+  // Fallback when there is no valid label line: explicit words in the title only. Never 15s.
+  var TITLE_FORMATS = [
+    { pattern: /touch/i, format: "touch" },
+    { pattern: /\b(7s|sevens)\b/i, format: "7s" }
+  ];
 
-  // Calendar descriptions may be plain text or simple HTML: read them as plain lines.
-  function descriptionLines(event) {
-    return String(event.description || "")
-      .replace(/<br\s*\/?>|<\/(p|div|li)>/gi, "\n")
-      .replace(/<[^>]*>/g, "")
-      .replace(/&nbsp;/g, " ")
-      .split("\n");
+  // Calendar descriptions can be plain text or HTML: read as plain-text lines, never rendered.
+  function descriptionLines(description) {
+    if (!description) return [];
+    var html = String(description).replace(/<br\s*\/?>|<\/(p|div|li|h[1-6])>/gi, "\n");
+    var text = new DOMParser().parseFromString(html, "text/html").body.textContent || "";
+    return text.replace(/\u00A0/g, " ").split("\n");
   }
 
-  function getLabel(event, lang) {
-    var lines = descriptionLines(event);
+  function getFormat(event) {
+    var lines = descriptionLines(event.description);
     for (var i = 0; i < lines.length; i++) {
-      var m = /^\s*label\s*:\s*(\S+)\s*$/i.exec(lines[i]);
-      if (m) {
-        var def = LABELS[m[1].toLowerCase()];
-        return def ? { text: def[lang], modifier: def.modifier } : null;
-      }
+      var m = /^\s*label\s*:\s*(.*?)\s*$/i.exec(lines[i]);
+      if (m && FORMATS.hasOwnProperty(m[1].toLowerCase())) return { format: FORMATS[m[1].toLowerCase()], by: "label" };
+    }
+    var title = event.summary || "";
+    for (var j = 0; j < TITLE_FORMATS.length; j++) {
+      if (TITLE_FORMATS[j].pattern.test(title)) return { format: TITLE_FORMATS[j].format, by: "title" };
     }
     return null;
   }
 
-  // No status data in Calendar: no status line is shown.
-  function getStatus(event, lang) { return null; }
+  function formatClass(game) {
+    var f = getFormat(game.raw);
+    return f ? " fixture--" + f.format : "";
+  }
+
+  /* ---------- Title display ----------
+     Display only; the Calendar title is not changed:
+     a line break after every ":", and each "|" becomes a line break. */
+  function titleNode(tag, title) {
+    var node = el(tag);
+    var parts = String(title).replace(/:/g, ":\n").split(/\||\n/);
+    var first = true;
+    parts.forEach(function (part) {
+      part = part.trim();
+      if (!part) return;
+      if (!first) node.appendChild(document.createElement("br"));
+      node.appendChild(document.createTextNode(part));
+      first = false;
+    });
+    return node;
+  }
 
   /* ---------- Venue ----------
      Calendar "location" is one free-text string ("Name, Plus Code, area, postcode, country").
@@ -270,20 +290,11 @@
   }
 
   /* ---------- Rendering ---------- */
-  function labelNode(game) {
-    var label = getLabel(game.raw, LANG);
-    if (!label) return null;
-    return el("span", "event-label" + (label.modifier ? " event-label--" + label.modifier : ""), label.text);
-  }
-
-  // Homepage card: same markup as the original .event cards.
+  // Homepage card: the original .event card, coloured by format.
   function card(game) {
-    var label = getLabel(game.raw, LANG);
-    var li = el("li", "event" + (label && label.modifier === "nicosia" ? " event--nicosia" : ""));
-    var labelEl = labelNode(game);
-    if (labelEl) li.appendChild(labelEl);
+    var li = el("li", "event" + formatClass(game));
     var body = el("div");
-    body.appendChild(el("h3", null, game.title));
+    body.appendChild(titleNode("h3", game.title));
     var meta = el("p", "event-meta");
     var time = el("time", null, dateText(game.date) + (game.time ? ", " + game.time : ""));
     time.dateTime = game.isoDate;
@@ -291,31 +302,24 @@
     body.appendChild(meta);
     var venue = venueName(game.venue);
     if (venue) body.appendChild(venueNode("p", "event-meta", venue, game.venue));
-    var status = getStatus(game.raw, LANG);
-    if (status) body.appendChild(el("p", "event-status", status));
     li.appendChild(body);
     return li;
   }
 
-  // Events page row: same markup as the original .event-row rows.
+  // Events page row: the original .event-row row, coloured by format.
   function row(game, isPast) {
-    var label = getLabel(game.raw, LANG);
-    var li = el("li", "event-row" + (label && label.modifier === "nicosia" ? " event-row--nicosia" : "") + (isPast ? " is-past" : ""));
+    var li = el("li", "event-row" + formatClass(game) + (isPast ? " is-past" : ""));
     var dateP = el("p", "event-date");
     var time = el("time", null, dateText(game.date));
     time.dateTime = game.isoDate;
     dateP.appendChild(time);
     li.appendChild(dateP);
     var body = el("div");
-    var labelEl = labelNode(game);
-    if (labelEl) body.appendChild(labelEl);
-    body.appendChild(el("h4", null, game.title));
+    body.appendChild(titleNode("h4", game.title));
     li.appendChild(body);
     var dl = el("dl");
     if (game.time) { dl.appendChild(el("dt", null, T.kickoff)); dl.appendChild(el("dd", null, game.time)); }
     if (game.venue) { dl.appendChild(el("dt", null, T.venue)); dl.appendChild(venueNode("dd", null, game.venue, game.venue)); }
-    var status = getStatus(game.raw, LANG);
-    if (status) { dl.appendChild(el("dt", null, T.status)); dl.appendChild(el("dd", null, status)); }
     li.appendChild(dl);
     return li;
   }
@@ -356,8 +360,6 @@
         monthGroups(pastList, past, true);
         pastSection.hidden = !past.length;
       }
-      var legend = document.querySelector("[data-fixtures-labels]");
-      if (legend) legend.hidden = !games.some(function (g) { return getLabel(g.raw, LANG); });
     }
 
     if (upcoming.length) {
